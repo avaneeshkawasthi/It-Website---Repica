@@ -1,0 +1,43 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "A user of the application.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "The unique identifier for the user." },
+        "displayName": { "type": "string", "description": "The user's display name." },
+        "email": { "type": "string", "format": "email", "description": "The user's email address." },
+        "photoURL": { "type": "string", "format": "uri", "description": "The user's profile picture URL." },
+        "bio": { "type": "string", "description": "A short biography of the user." },
+        "createdAt": { "type": "string", "format": "date-time", "description": "When the user profile was created." }
+      },
+      "required": ["uid", "displayName", "email"]
+    },
+    "Post": {
+      "title": "Post",
+      "description": "A post created by a user.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "The unique identifier for the post." },
+        "authorId": { "type": "string", "description": "The UID of the user who created the post." },
+        "authorName": { "type": "string", "description": "The display name of the author." },
+        "authorPhoto": { "type": "string", "format": "uri", "description": "The profile picture URL of the author." },
+        "content": { "type": "string", "description": "The text content of the post." },
+        "createdAt": { "type": "string", "format": "date-time", "description": "When the post was created." },
+        "likes": { "type": "number", "description": "The number of likes the post has received." }
+      },
+      "required": ["authorId", "content", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile documents."
+    },
+    "/posts/{postId}": {
+      "schema": "Post",
+      "description": "Collection of all posts."
+    }
+  }
+}
